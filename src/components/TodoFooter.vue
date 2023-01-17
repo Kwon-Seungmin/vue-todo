@@ -3,14 +3,13 @@
         <span class="clearAllBtn" v-on:click="clearTodo">Clear All</span>
     </div>
 </template>
+<script setup>
+import { defineEmits } from 'vue';
 
-<script>
-export default {
-    methods: {
-        clearTodo() {
-            this.$emit('clearAll');
-        }
-    }
+const emit = defineEmits(['clearAll']);
+
+const clearTodo = () => {
+    emit('clearAll');
 }
 </script>
 

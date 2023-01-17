@@ -1,7 +1,7 @@
 <template>
     <div>
         <transition-group name="list" tag="ul">
-            <li class="shadow" v-for="(todoItem, index) in propsdata" v-bind:key="todoItem">
+            <li class="shadow" v-for="(todoItem, index) in props.propsdata" v-bind:key="todoItem">
                 <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }"
                     v-on:click="toggleComplete(todoItem, index)"></i>
                 <span v-bind:class="{ textCompleted: todoItem.completed }">{{ todoItem.item }}</span>
@@ -13,18 +13,19 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: ["propsdata"],
-    methods: {
-        removeTodo(todoItem, index) {
-            this.$emit('removeItem', todoItem, index);
-        },
-        toggleComplete(todoItem, index) {
-            this.$emit('toggleItem', todoItem, index);
-        }
-    }
+<script setup>
+import { defineProps, defineEmits } from "vue"
+
+const props = defineProps(['propsdata']);
+const emit = defineEmits(['removeItem', 'toggleComplete']);
+
+const removeTodo = (todoItem, index) => {
+    emit('removeItem', todoItem, index);
 }
+const toggleComplete = (todoItem, index) => {
+    emit('toggleItem', todoItem, index);
+}
+
 </script>
 
 <style scoped>

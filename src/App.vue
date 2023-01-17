@@ -6,58 +6,44 @@
     <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
   </div>
 </template>
+<script setup>
+import TodoHeader from './components/TodoHeader.vue';
+import TodoInput from './components/TodoInput.vue';
+import TodoList from './components/TodoList.vue';
+import TodoFooter from './components/TodoFooter.vue';
+import { ref } from 'vue'
 
-<script>
-import TodoHeader from './components/TodoHeader.vue'
-import TodoInput from './components/TodoInput.vue'
-import TodoList from './components/TodoList.vue'
-import TodoFooter from './components/TodoFooter.vue'
+const todoItems = ref([]);
 
-export default {
-  name: 'App',
-  components: {
-    TodoHeader,
-    TodoInput,
-    TodoList,
-    TodoFooter
-  },
-  data() {
-    return {
-      todoItems: []
-    }
-  },
-  methods: {
-    addOneItem(todoItem) {
-      const obj = { completed: false, item: todoItem };
-      localStorage.setItem(todoItem, JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
-
-    removeOneItem(todoItem, index) {
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
-
-    toggleOneItem(todoItem, index) {
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-
-    clearAllItems() {
-      localStorage.clear();
-      this.todoItems = [];
-    }
-  },
-
-  created() {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-      }
+const addOneItem = (todoItem) => {
+  const obj = {
+    completed: false,
+    item: todoItem
+  }
+  localStorage.setItem(todoItem.item, JSON.stringify(obj));
+  todoItems.value.push(obj);
+}
+const removeOneItem = (todoItem, index) => {
+  localStorage.removeItem(todoItem.item);
+  todoItems.value.splice(index, 1);
+}
+const toggleOneItem = (todoItem, index) => {
+  todoItems.value[index].completed = !todoItems.value[index].completed;
+  localStorage.removeItem(todoItem.item.value);
+  localStorage.setItem(todoItem.item.value, JSON.stringify(todoItem));
+}
+const clearAllItems = () => {
+  localStorage.clear();
+  todoItems.value = [];
+}
+const onCreated = () => {
+  if (localStorage.length > 0) {
+    for (let i = 0; i < localStorage.length; i++) {
+      todoItems.value.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
     }
   }
 }
+onCreated();
 </script>
 
 <style>

@@ -4,7 +4,6 @@
         <span class="addContainer" v-on:click="addTodo">
             <i class="fa-solid fa-plus addBtn"></i>
         </span>
-
         <alertModal v-if="showModal" @close="showModal = false">
             <template v-slot:header>
                 <h3>
@@ -20,32 +19,24 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import alertModal from './common/alertModal.vue'
+import { ref, defineEmits } from 'vue'
 
-export default {
-    data() {
-        return {
-            newTodoItem: "",
-            showModal: false
-        }
-    },
-    methods: {
-        addTodo() {
-            if (this.newTodoItem !== '') {
-                this.$emit('addTodoItem', this.newTodoItem);
-                this.clearInput();
-            } else {
-                this.showModal = !this.showModal;
-            }
-        },
-        clearInput() {
-            this.newTodoItem = "";
-        }
-    },
-    components: {
-        alertModal
+const newTodoItem = ref("");
+const showModal = ref(false);
+const emit = defineEmits(['addTodoItem']);
+
+const addTodo = () => {
+    if (newTodoItem.value !== '') {
+        emit('addTodoItem', newTodoItem.value);
+        clearInput();
+    } else {
+        showModal.value = !showModal.value;
     }
+}
+const clearInput = () => {
+    newTodoItem.value = '';
 }
 </script>
 
