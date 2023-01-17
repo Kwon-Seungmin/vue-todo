@@ -1,7 +1,7 @@
 <template>
-  <header>
-    <h1>TODO it!</h1>
-  </header>
+    <header>
+        <h1>TODO it!</h1>
+    </header>
 </template>
 
 <script>
@@ -16,6 +16,4 @@ h1 {
     font-weight: 900;
     margin: 2.5rem 0 1.5rem;
 }
-
-
 </style>

@@ -1,21 +1,21 @@
 <template>
     <div class="inputBox shadow">
-        <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo"/>
+        <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo" />
         <span class="addContainer" v-on:click="addTodo">
-        <i class="fa-solid fa-plus addBtn"></i>
-    </span>
+            <i class="fa-solid fa-plus addBtn"></i>
+        </span>
 
-    <alertModal v-if="showModal" @close="showModal = false">
-        <template v-slot:header>
-            <h3>
-                경고 !
-                <i class="closeModalBtn fa-solid fa-xmark" @click="showModal = false"></i>
-            </h3>
-        </template>
+        <alertModal v-if="showModal" @close="showModal = false">
+            <template v-slot:header>
+                <h3>
+                    경고 !
+                    <i class="closeModalBtn fa-solid fa-xmark" @click="showModal = false"></i>
+                </h3>
+            </template>
 
-        <template v-slot:body>
-            <div>아무것도 입력하지 않으셨습니다.</div>
-        </template>
+            <template v-slot:body>
+                <div>아무것도 입력하지 않으셨습니다.</div>
+            </template>
         </alertModal>
     </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         addTodo() {
-            if(this.newTodoItem !== ''){
+            if (this.newTodoItem !== '') {
                 this.$emit('addTodoItem', this.newTodoItem);
                 this.clearInput();
             } else {
@@ -43,11 +43,9 @@ export default {
             this.newTodoItem = "";
         }
     },
-    
     components: {
-    alertModal
+        alertModal
     }
-
 }
 </script>
 
@@ -60,7 +58,7 @@ input:focus {
     background: white;
     height: 50px;
     line-height: 50px;
-    border-radius: 5px;    
+    border-radius: 5px;
 }
 
 .inputBox input {

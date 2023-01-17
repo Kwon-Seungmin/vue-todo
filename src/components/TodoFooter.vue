@@ -9,10 +9,8 @@ export default {
     methods: {
         clearTodo() {
             this.$emit('clearAll');
-            
         }
     }
-
 }
 </script>
 
@@ -30,5 +28,4 @@ export default {
     color: #e20404;
     display: block;
 }
-
 </style>

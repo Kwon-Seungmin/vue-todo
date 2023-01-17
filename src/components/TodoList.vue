@@ -3,21 +3,19 @@
         <transition-group name="list" tag="ul">
             <li class="shadow" v-for="(todoItem, index) in propsdata" v-bind:key="todoItem">
                 <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-                v-on:click="toggleComplete(todoItem, index)"></i>
-
+                    v-on:click="toggleComplete(todoItem, index)"></i>
                 <span v-bind:class="{ textCompleted: todoItem.completed }">{{ todoItem.item }}</span>
                 <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                     <i class="fa-solid fa-trash-can"></i>
-                </span>            
+                </span>
             </li>
         </transition-group>
     </div>
 </template>
 
 <script>
-
 export default {
-    props: ["propsdata"],    
+    props: ["propsdata"],
     methods: {
         removeTodo(todoItem, index) {
             this.$emit('removeItem', todoItem, index);
@@ -26,7 +24,6 @@ export default {
             this.$emit('toggleItem', todoItem, index);
         }
     }
-
 }
 </script>
 
